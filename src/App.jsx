@@ -368,24 +368,43 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
   if (!task) return null;
 
   async function apply() {
-    if (!session) {
-      setScreen("auth");
-      return;
-    }
-    setStatus("");
+  if (!session) {
+    setScreen("auth");
+    return;
+  }
+
+  setStatus("");
+
+  if (!message.trim()) {
+    setStatus("Напишите короткое сообщение для заказчика.");
+    return;
+  }
+
+  try {
     const { error } = await supabase.from("applications").insert({
       task_id: task.id,
       performer_id: session.user.id,
-      message: message || "Готов выполнить задачу. Могу обсудить детали.",
+      message: message.trim(),
       status: "sent",
     });
-    if (error) setStatus(error.message);
-    else {
-      setMessage("");
-      setStatus("Отклик отправлен и сохранён в Supabase.");
-      await refreshApplications();
+
+    if (error) {
+      if (error.message.includes("duplicate key")) {
+        setStatus("Вы уже откликнулись на это задание.");
+      } else {
+        throw error;
+      }
+      return;
     }
+
+    setMessage("");
+    setStatus("Отклик отправлен.");
+    await refreshApplications();
+
+  } catch (error) {
+    setStatus(error.message || "Ошибка при отправке отклика");
   }
+}
 
   return (
     <main className="min-h-screen bg-slate-50">
