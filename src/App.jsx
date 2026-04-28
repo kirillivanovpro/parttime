@@ -1044,33 +1044,45 @@ export default function ParttimeApp() {
 
     return () => authListener.subscription.unsubscribe();
   }, []);
+async function loadEverything(activeSession = session) {
+  if (!isSupabaseConfigured) return;
 
-  async function loadEverything(activeSession = session) {
-    if (!isSupabaseConfigured) return;
+  const [
+    { data: taskRows },
+    { data: profileRows },
+    { data: messageRows },
+    { data: reviewRows },
+    { data: applicationRows }
+  ] = await Promise.all([
+    supabase.from("tasks").select("*").order("created_at", { ascending: false }),
+    supabase.from("profiles").select("*"),
+    supabase.from("messages").select("*").order("created_at", { ascending: true }).limit(50),
+    supabase.from("reviews").select("*").order("created_at", { ascending: false }),
+    supabase.from("applications").select("*").order("created_at", { ascending: false }),
+  ]);
 
-    const [{ data: taskRows }, { data: profileRows }, { data: applicationRows }, { data: messageRows }, { data: reviewRows }] =
-      await Promise.all([
-        supabase.from("tasks").select("*").order("created_at", { ascending: false }),
-        supabase.from("profiles").select("*"),
-        supabase.from("applications").select("*").order("created_at", { ascending: false }),
-        supabase.from("messages").select("*").order("created_at", { ascending: true }).limit(50),
-        supabase.from("reviews").select("*").order("created_at", { ascending: false }),
-      ]);
+  setTasks(taskRows || []);
+  setMessages(messageRows || []);
+  setReviews(reviewRows || []);
+  setApplications(applicationRows || []);
 
-    setTasks(taskRows || []);
-    setApplications(applicationRows || []);
-    setMessages(messageRows || []);
-    setReviews(reviewRows || []);
+  const byId = {};
+  (profileRows || []).forEach((p) => {
+    byId[p.id] = p;
+  });
+  setProfiles(byId);
 
-    const byId = {};
-    (profileRows || []).forEach((p) => {
-      byId[p.id] = p;
-    });
-    setProfiles(byId);
-
-    if (activeSession?.user?.id) {
-      setProfile(byId[activeSession.user.id] || { id: activeSession.user.id, full_name: activeSession.user.email, role: "both", city: "Рига" });
-    }
+  if (activeSession?.user?.id) {
+    setProfile(
+      byId[activeSession.user.id] || {
+        id: activeSession.user.id,
+        full_name: activeSession.user.email,
+        role: "both",
+        city: "Рига",
+      }
+    );
+  }
+}
   }
 
   async function refreshTasks() {
