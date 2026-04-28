@@ -368,19 +368,18 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
   if (!task) return null;
 
   async function apply() {
-  if (!session) {
-    setScreen("auth");
-    return;
-  }
+    if (!session) {
+      setScreen("auth");
+      return;
+    }
 
-  setStatus("");
+    setStatus("");
 
-  if (!message.trim()) {
-    setStatus("Напишите короткое сообщение для заказчика.");
-    return;
-  }
+    if (!message.trim()) {
+      setStatus("Напишите короткое сообщение для заказчика.");
+      return;
+    }
 
-  try {
     const { error } = await supabase.from("applications").insert({
       task_id: task.id,
       performer_id: session.user.id,
@@ -392,7 +391,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
       if (error.message.includes("duplicate key")) {
         setStatus("Вы уже откликнулись на это задание.");
       } else {
-        throw error;
+        setStatus(error.message);
       }
       return;
     }
@@ -400,12 +399,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
     setMessage("");
     setStatus("Отклик отправлен.");
     await refreshApplications();
-
-  } catch (error) {
-    setStatus(error.message || "Ошибка при отправке отклика");
   }
-}
-
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8">
