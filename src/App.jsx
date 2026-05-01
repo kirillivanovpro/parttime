@@ -18,12 +18,427 @@ const icons = {
   send: "➤",
 };
 
-const categories = [
-  { label: "Помощь по дому", icon: icons.home },
-  { label: "Доставка", icon: icons.truck },
-  { label: "Физическая помощь", icon: icons.hammer },
-  { label: "Онлайн-задачи", icon: icons.laptop },
+const TEXT = {
+  ru: {
+    navHome: "Главная",
+    navFeed: "Задания",
+    navCreate: "Создать",
+    navChats: "Чаты",
+    navProfile: "Профиль",
+    login: "Войти",
+    logout: "Выйти",
+    language: "LV",
+
+    homeBadge: "Part:time · Латвия",
+    homeTitle: "Найди помощь рядом — или заработай в свободное время",
+    homeSubtitle: "Part:time помогает быстро найти исполнителя для бытовых, курьерских и онлайн-задач в Латвии.",
+    searchPlaceholder: "Что нужно сделать? Например: собрать мебель, доставка, уборка",
+    createTask: "Создать задание",
+    needHelp: "Мне нужна помощь",
+    findWork: "Найти подработку",
+    popularCategories: "Популярные категории",
+    popularCategoriesText: "Быстрые задачи для людей и малого бизнеса.",
+    viewTasks: "Смотреть задания",
+    howItWorks: "Как это работает",
+    howItWorksText: "Минимум шагов — от задачи до исполнителя.",
+    step1Title: "Опишите задачу",
+    step1Text: "Укажите, что нужно сделать, где, когда и за какой бюджет.",
+    step2Title: "Получите отклики",
+    step2Text: "Исполнители видят задание и отправляют свои предложения.",
+    step3Title: "Выберите исполнителя",
+    step3Text: "Сравните профили, отзывы и договоритесь в чате.",
+    trustBadge: "Доверие",
+    trustTitle: "Выбирайте людей, а не случайные объявления",
+    trustText: "У каждого пользователя есть профиль, отзывы, рейтинг и история взаимодействий. Это делает локальные задачи понятнее и безопаснее.",
+    verifiedProfile: "Проверенный профиль",
+    reviewsAfterTask: "Отзывы после задания",
+    chatWithPerformer: "Чат с исполнителем",
+    readyTry: "Готовы попробовать?",
+    firstTaskMinute: "Создайте первое задание за 1 минуту.",
+
+    categoryHome: "Дом и ремонт",
+    categoryHomeText: "Сборка мебели, мелкий ремонт, помощь по дому",
+    categoryDelivery: "Доставка и поручения",
+    categoryDeliveryText: "Документы, покупки, небольшие доставки",
+    categoryPhysical: "Физическая помощь",
+    categoryPhysicalText: "Переезды, перенос вещей, сезонные работы",
+    categoryOnline: "Онлайн-задачи",
+    categoryOnlineText: "Дизайн, тексты, IT-помощь, соцсети",
+
+    authBadge: "Аккаунт и доверие",
+    authTitle: "Регистрация нужна для безопасности",
+    authText: "Профиль, рейтинг, отзывы и история взаимодействий создают доверие между заказчиком и исполнителем.",
+    authLoginTab: "Вход",
+    authRegisterTab: "Регистрация",
+    authLoginTitle: "Войти",
+    authRegisterTitle: "Создать аккаунт",
+    name: "Имя",
+    phone: "Телефон",
+    city: "Город",
+    role: "Роль",
+    roleBoth: "Заказчик и исполнитель",
+    roleCustomer: "Только заказчик",
+    rolePerformer: "Только исполнитель",
+    email: "Email",
+    password: "Пароль",
+    wait: "Подождите...",
+    register: "Зарегистрироваться",
+    authCreatedEmail: "Аккаунт создан. Если включено подтверждение email, проверьте почту.",
+    authMissingSupabase: "Supabase не подключён. Заполните .env: VITE_SUPABASE_URL и VITE_SUPABASE_ANON_KEY.",
+
+    feedTitle: "Лента заданий",
+    feedSubtitle: "Данные загружаются из Supabase.",
+    customer: "Заказчик",
+    details: "Подробнее",
+
+    createNeedLoginTitle: "Сначала нужна регистрация",
+    createNeedLoginText: "Чтобы создать задание, нужен аккаунт Part:time.",
+    createNeedLoginButton: "Войти / зарегистрироваться",
+    createTitle: "Создать задание",
+    createBadge: "Новое задание",
+    titlePlaceholder: "Что нужно сделать?",
+    budgetPlaceholder: "Бюджет, €",
+    descriptionPlaceholder: "Детали",
+    publishTask: "Опубликовать задание",
+    publishing: "Публикуем...",
+    errorTaskTitle: "Напишите, что нужно сделать.",
+    errorTaskPrice: "Укажите бюджет больше 0 €.",
+
+    backToTasks: "← Назад к заданиям",
+    description: "Описание",
+    noDescription: "Описание не добавлено.",
+    applyTitle: "Откликнуться",
+    applyLoginNotice: "Чтобы откликнуться, нужно войти.",
+    applyPlaceholder: "Напишите коротко, когда можете выполнить задачу.",
+    sendApplication: "Отправить отклик",
+    emptyApplication: "Напишите короткое сообщение для заказчика.",
+    duplicateApplication: "Вы уже откликнулись на это задание.",
+    applicationSent: "Отклик отправлен.",
+
+    chatsTitle: "Чаты",
+    chatAfterAccept: "Чат появляется после того, как заказчик выбрал исполнителя.",
+    noChats: "Пока нет активных чатов. Выберите исполнителя в откликах или дождитесь выбора по вашему отклику.",
+    chatNeedsLogin: "Чат доступен после входа",
+    taskChat: "Диалог по выбранному заданию.",
+    interlocutor: "Собеседник",
+    backToProfile: "Назад в профиль",
+    noMessages: "Пока нет сообщений. Напишите первым.",
+    writeMessage: "Написать сообщение...",
+    you: "Вы",
+    autoTranslateOn: "Автоперевод включён",
+    autoTranslateOff: "Автоперевод выключен",
+    autoTranslation: "Автоперевод",
+    original: "Оригинал",
+    demoTranslationNotice: "Демо-перевод. Позже подключим DeepL/OpenAI API для точного перевода.",
+
+    profileLoginTitle: "Профиль доступен после входа",
+    profileTitle: "Профиль и доверие",
+    profileSubtitle: "Профиль, фото, рейтинг, отзывы и отклики сохраняются в Supabase.",
+    profileVerified: "Профиль проверен",
+    profileNeedsVerify: "Требуется проверка",
+    reviews: "Отзывы",
+    noReviews: "Пока нет отзывов.",
+    ratingReviews: "отзывов",
+    editProfile: "Редактировать аккаунт",
+    avatarTitle: "Фото профиля",
+    avatarText: "Загружается в Supabase Storage bucket avatars.",
+    uploadPhoto: "Загрузить фото",
+    bio: "О себе",
+    saveProfile: "Сохранить профиль",
+    demoVerify: "Демо: пройти проверку",
+    demoReview: "Демо: добавить отзыв",
+    profileSaved: "Профиль сохранён.",
+    chooseImage: "Выберите изображение.",
+    demoReviewAdded: "Демо-отзыв добавлен. Обновите страницу или профиль.",
+
+    applicationsTitle: "Отклики на мои задания",
+    applicationsSubtitle: "Здесь заказчик видит, кто откликнулся на его опубликованные задания.",
+    applicationsCount: "откликов",
+    noApplications: "Пока нет откликов на ваши задания.",
+    task: "Задание",
+    performer: "Исполнитель",
+    waitingDecision: "Ожидает решения",
+    accepted: "Выбран",
+    acceptPerformer: "Выбрать исполнителя",
+    openChat: "Открыть чат",
+    performerSelected: "Исполнитель выбран. Теперь можно открыть чат.",
+    deletedTask: "Задание удалено",
+    cityUnknown: "Город не указан",
+    phoneUnknown: "телефон не указан",
+    noMessage: "Без сообщения",
+
+    acceptedTasksTitle: "Мои принятые задания",
+    acceptedTasksSubtitle: "Здесь исполнитель видит задания, где его выбрал заказчик.",
+    noAcceptedTasks: "Пока вас не выбрали исполнителем.",
+
+    supabaseNotConnected: "Supabase не подключён. Создайте .env на основе .env.example.",
+  },
+
+  lv: {
+    navHome: "Sākums",
+    navFeed: "Uzdevumi",
+    navCreate: "Izveidot",
+    navChats: "Čati",
+    navProfile: "Profils",
+    login: "Ienākt",
+    logout: "Iziet",
+    language: "RU",
+
+    homeBadge: "Part:time · Latvija",
+    homeTitle: "Atrodi palīdzību tuvumā — vai nopelni brīvajā laikā",
+    homeSubtitle: "Part:time palīdz ātri atrast izpildītāju mājas, kurjera un tiešsaistes uzdevumiem Latvijā.",
+    searchPlaceholder: "Kas jāizdara? Piemēram: salikt mēbeles, piegāde, uzkopšana",
+    createTask: "Izveidot uzdevumu",
+    needHelp: "Man vajag palīdzību",
+    findWork: "Atrast darbu",
+    popularCategories: "Populāras kategorijas",
+    popularCategoriesText: "Ātri uzdevumi cilvēkiem un mazajiem uzņēmumiem.",
+    viewTasks: "Skatīt uzdevumus",
+    howItWorks: "Kā tas darbojas",
+    howItWorksText: "Daži soļi — no uzdevuma līdz izpildītājam.",
+    step1Title: "Apraksti uzdevumu",
+    step1Text: "Norādi, kas jāizdara, kur, kad un par kādu budžetu.",
+    step2Title: "Saņem pieteikumus",
+    step2Text: "Izpildītāji redz uzdevumu un nosūta savus piedāvājumus.",
+    step3Title: "Izvēlies izpildītāju",
+    step3Text: "Salīdzini profilus, atsauksmes un vienojies čatā.",
+    trustBadge: "Uzticība",
+    trustTitle: "Izvēlies cilvēkus, nevis nejaušus sludinājumus",
+    trustText: "Katram lietotājam ir profils, atsauksmes, vērtējums un sadarbības vēsture. Tas padara vietējos uzdevumus saprotamākus un drošākus.",
+    verifiedProfile: "Pārbaudīts profils",
+    reviewsAfterTask: "Atsauksmes pēc uzdevuma",
+    chatWithPerformer: "Čats ar izpildītāju",
+    readyTry: "Gatavs pamēģināt?",
+    firstTaskMinute: "Izveido pirmo uzdevumu 1 minūtē.",
+
+    categoryHome: "Māja un remonts",
+    categoryHomeText: "Mēbeļu salikšana, sīks remonts, palīdzība mājās",
+    categoryDelivery: "Piegāde un uzdevumi",
+    categoryDeliveryText: "Dokumenti, pirkumi, nelielas piegādes",
+    categoryPhysical: "Fiziska palīdzība",
+    categoryPhysicalText: "Pārvākšanās, mantu nešana, sezonas darbi",
+    categoryOnline: "Tiešsaistes uzdevumi",
+    categoryOnlineText: "Dizains, teksti, IT palīdzība, sociālie tīkli",
+
+    authBadge: "Konts un uzticība",
+    authTitle: "Reģistrācija ir vajadzīga drošībai",
+    authText: "Profils, vērtējums, atsauksmes un sadarbības vēsture veido uzticību starp pasūtītāju un izpildītāju.",
+    authLoginTab: "Ienākt",
+    authRegisterTab: "Reģistrācija",
+    authLoginTitle: "Ienākt",
+    authRegisterTitle: "Izveidot kontu",
+    name: "Vārds",
+    phone: "Tālrunis",
+    city: "Pilsēta",
+    role: "Loma",
+    roleBoth: "Pasūtītājs un izpildītājs",
+    roleCustomer: "Tikai pasūtītājs",
+    rolePerformer: "Tikai izpildītājs",
+    email: "E-pasts",
+    password: "Parole",
+    wait: "Lūdzu, uzgaidi...",
+    register: "Reģistrēties",
+    authCreatedEmail: "Konts izveidots. Ja e-pasta apstiprināšana ir ieslēgta, pārbaudi pastu.",
+    authMissingSupabase: "Supabase nav pieslēgts. Aizpildi .env: VITE_SUPABASE_URL un VITE_SUPABASE_ANON_KEY.",
+
+    feedTitle: "Uzdevumu lente",
+    feedSubtitle: "Dati tiek ielādēti no Supabase.",
+    customer: "Pasūtītājs",
+    details: "Vairāk",
+
+    createNeedLoginTitle: "Vispirms jāpieslēdzas",
+    createNeedLoginText: "Lai izveidotu uzdevumu, vajadzīgs Part:time konts.",
+    createNeedLoginButton: "Ienākt / reģistrēties",
+    createTitle: "Izveidot uzdevumu",
+    createBadge: "Jauns uzdevums",
+    titlePlaceholder: "Kas jāizdara?",
+    budgetPlaceholder: "Budžets, €",
+    descriptionPlaceholder: "Detaļas",
+    publishTask: "Publicēt uzdevumu",
+    publishing: "Publicējam...",
+    errorTaskTitle: "Uzraksti, kas jāizdara.",
+    errorTaskPrice: "Norādi budžetu virs 0 €.",
+
+    backToTasks: "← Atpakaļ pie uzdevumiem",
+    description: "Apraksts",
+    noDescription: "Apraksts nav pievienots.",
+    applyTitle: "Pieteikties",
+    applyLoginNotice: "Lai pieteiktos, jāpieslēdzas.",
+    applyPlaceholder: "Uzraksti īsi, kad vari izpildīt uzdevumu.",
+    sendApplication: "Nosūtīt pieteikumu",
+    emptyApplication: "Uzraksti īsu ziņu pasūtītājam.",
+    duplicateApplication: "Tu jau pieteicies šim uzdevumam.",
+    applicationSent: "Pieteikums nosūtīts.",
+
+    chatsTitle: "Čati",
+    chatAfterAccept: "Čats parādās pēc tam, kad pasūtītājs izvēlas izpildītāju.",
+    noChats: "Aktīvu čatu vēl nav. Izvēlies izpildītāju pieteikumos vai sagaidi, kad izvēlēsies tevi.",
+    chatNeedsLogin: "Čats pieejams pēc pieslēgšanās",
+    taskChat: "Dialogs par izvēlēto uzdevumu.",
+    interlocutor: "Sarunas biedrs",
+    backToProfile: "Atpakaļ uz profilu",
+    noMessages: "Ziņu vēl nav. Uzraksti pirmais.",
+    writeMessage: "Rakstīt ziņu...",
+    you: "Tu",
+    autoTranslateOn: "Automātiska tulkošana ieslēgta",
+    autoTranslateOff: "Automātiska tulkošana izslēgta",
+    autoTranslation: "Automātiskais tulkojums",
+    original: "Oriģināls",
+    demoTranslationNotice: "Demo tulkojums. Vēlāk pieslēgsim DeepL/OpenAI API precīzam tulkojumam.",
+
+    profileLoginTitle: "Profils pieejams pēc pieslēgšanās",
+    profileTitle: "Profils un uzticība",
+    profileSubtitle: "Profils, foto, vērtējums, atsauksmes un pieteikumi glabājas Supabase.",
+    profileVerified: "Profils pārbaudīts",
+    profileNeedsVerify: "Nepieciešama pārbaude",
+    reviews: "Atsauksmes",
+    noReviews: "Atsauksmju vēl nav.",
+    ratingReviews: "atsauksmes",
+    editProfile: "Rediģēt kontu",
+    avatarTitle: "Profila foto",
+    avatarText: "Augšupielādējas Supabase Storage bucket avatars.",
+    uploadPhoto: "Augšupielādēt foto",
+    bio: "Par sevi",
+    saveProfile: "Saglabāt profilu",
+    demoVerify: "Demo: pārbaudīt profilu",
+    demoReview: "Demo: pievienot atsauksmi",
+    profileSaved: "Profils saglabāts.",
+    chooseImage: "Izvēlies attēlu.",
+    demoReviewAdded: "Demo atsauksme pievienota. Atjauno lapu vai profilu.",
+
+    applicationsTitle: "Pieteikumi maniem uzdevumiem",
+    applicationsSubtitle: "Šeit pasūtītājs redz, kas pieteicies viņa publicētajiem uzdevumiem.",
+    applicationsCount: "pieteikumi",
+    noApplications: "Taviem uzdevumiem vēl nav pieteikumu.",
+    task: "Uzdevums",
+    performer: "Izpildītājs",
+    waitingDecision: "Gaida lēmumu",
+    accepted: "Izvēlēts",
+    acceptPerformer: "Izvēlēties izpildītāju",
+    openChat: "Atvērt čatu",
+    performerSelected: "Izpildītājs izvēlēts. Tagad var atvērt čatu.",
+    deletedTask: "Uzdevums dzēsts",
+    cityUnknown: "Pilsēta nav norādīta",
+    phoneUnknown: "tālrunis nav norādīts",
+    noMessage: "Bez ziņas",
+
+    acceptedTasksTitle: "Mani pieņemtie uzdevumi",
+    acceptedTasksSubtitle: "Šeit izpildītājs redz uzdevumus, kuros viņu izvēlējās pasūtītājs.",
+    noAcceptedTasks: "Tevi vēl nav izvēlējušies par izpildītāju.",
+
+    supabaseNotConnected: "Supabase nav pieslēgts. Izveido .env no .env.example.",
+  },
+};
+
+const commonTasks = {
+  ru: ["Собрать мебель", "Доставка по Риге", "Помочь с переездом", "Уборка квартиры", "Дизайн баннера", "Мелкий ремонт"],
+  lv: ["Salikt mēbeles", "Piegāde Rīgā", "Palīdzēt pārvākties", "Dzīvokļa uzkopšana", "Banera dizains", "Sīks remonts"],
+};
+
+const localizedCategories = (ui) => [
+  { label: ui.categoryHome, value: ui.categoryHome, icon: icons.home, text: ui.categoryHomeText },
+  { label: ui.categoryDelivery, value: ui.categoryDelivery, icon: icons.truck, text: ui.categoryDeliveryText },
+  { label: ui.categoryPhysical, value: ui.categoryPhysical, icon: icons.hammer, text: ui.categoryPhysicalText },
+  { label: ui.categoryOnline, value: ui.categoryOnline, icon: icons.laptop, text: ui.categoryOnlineText },
 ];
+
+function detectLanguage(text) {
+  const value = (text || "").toLowerCase();
+  if (/[а-яё]/i.test(value)) return "ru";
+  if (/[āčēģīķļņšūž]/i.test(value)) return "lv";
+  if (/\b(labdien|sveiki|paldies|varu|rīt|šodien|lūdzu|cik|kad|adrese|palīdzēt|atbraukt|sarunāts)\b/i.test(value)) return "lv";
+  return "unknown";
+}
+
+function translateDemo(text, targetLang) {
+  const original = text || "";
+  const sourceLang = detectLanguage(original);
+
+  if (sourceLang === targetLang || sourceLang === "unknown") return null;
+
+  const normalized = original.trim().toLowerCase();
+
+  const exact = {
+    ru: {
+      "labdien": "Здравствуйте",
+      "sveiki": "Привет",
+      "paldies": "Спасибо",
+      "varu atbraukt pēc 18:00": "Могу приехать после 18:00",
+      "varu palīdzēt rīt no rīta": "Могу помочь завтра утром",
+      "cik tas maksās?": "Сколько это будет стоить?",
+      "sarunāts": "Договорились",
+    },
+    lv: {
+      "здравствуйте": "Labdien",
+      "привет": "Sveiki",
+      "спасибо": "Paldies",
+      "могу приехать после 18:00": "Varu atbraukt pēc 18:00",
+      "могу помочь завтра утром": "Varu palīdzēt rīt no rīta",
+      "сколько это будет стоить?": "Cik tas maksās?",
+      "договорились": "Sarunāts",
+    },
+  };
+
+  if (exact[targetLang]?.[normalized]) return exact[targetLang][normalized];
+
+  const ruToLv = [
+    ["здравствуйте", "labdien"],
+    ["привет", "sveiki"],
+    ["спасибо", "paldies"],
+    ["могу", "varu"],
+    ["готов", "gatavs"],
+    ["готова", "gatava"],
+    ["помочь", "palīdzēt"],
+    ["приеду", "atbraukšu"],
+    ["сегодня", "šodien"],
+    ["завтра", "rīt"],
+    ["утром", "no rīta"],
+    ["вечером", "vakarā"],
+    ["после", "pēc"],
+    ["адрес", "adrese"],
+    ["когда", "kad"],
+    ["сколько", "cik"],
+    ["стоит", "maksā"],
+    ["да", "jā"],
+    ["нет", "nē"],
+    ["ок", "labi"],
+    ["договорились", "sarunāts"],
+  ];
+
+  const lvToRu = [
+    ["labdien", "здравствуйте"],
+    ["sveiki", "привет"],
+    ["paldies", "спасибо"],
+    ["varu", "могу"],
+    ["gatavs", "готов"],
+    ["gatava", "готова"],
+    ["palīdzēt", "помочь"],
+    ["atbraukšu", "приеду"],
+    ["šodien", "сегодня"],
+    ["rīt", "завтра"],
+    ["no rīta", "утром"],
+    ["vakarā", "вечером"],
+    ["pēc", "после"],
+    ["adrese", "адрес"],
+    ["kad", "когда"],
+    ["cik", "сколько"],
+    ["maksā", "стоит"],
+    ["jā", "да"],
+    ["nē", "нет"],
+    ["labi", "ок"],
+    ["sarunāts", "договорились"],
+  ];
+
+  let translated = original;
+
+  const pairs = targetLang === "lv" ? ruToLv : lvToRu;
+  pairs.forEach(([from, to]) => {
+    const regexp = new RegExp(`\\b${from}\\b`, "gi");
+    translated = translated.replace(regexp, to);
+  });
+
+  return translated === original ? null : translated;
+}
 
 function Button({ children, onClick, variant = "solid", className = "", type = "button", disabled = false }) {
   const styles = {
@@ -92,13 +507,13 @@ function Logo() {
   );
 }
 
-function Header({ screen, setScreen, session, profile, onLogout }) {
+function Header({ screen, setScreen, session, profile, onLogout, lang, setLang, ui }) {
   const nav = [
-    ["home", "Главная"],
-    ["feed", "Задания"],
-    ["create", "Создать"],
-    ["chats", "Чаты"],
-    ["profile", "Профиль"],
+    ["home", ui.navHome],
+    ["feed", ui.navFeed],
+    ["create", ui.navCreate],
+    ["chats", ui.navChats],
+    ["profile", ui.navProfile],
   ];
 
   return (
@@ -123,6 +538,13 @@ function Header({ screen, setScreen, session, profile, onLogout }) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setLang(lang === "ru" ? "lv" : "ru")}
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-black text-slate-700 hover:bg-slate-50"
+          >
+            {ui.language}
+          </button>
+
           {session ? (
             <>
               <button
@@ -132,12 +554,12 @@ function Header({ screen, setScreen, session, profile, onLogout }) {
                 <Avatar profile={profile} size="sm" /> {profile?.full_name || session.user.email}
               </button>
               <Button onClick={onLogout} variant="outline" className="rounded-full">
-                Выйти
+                {ui.logout}
               </Button>
             </>
           ) : (
             <Button onClick={() => setScreen("auth")} variant="outline" className="rounded-full">
-              Войти
+              {ui.login}
             </Button>
           )}
         </div>
@@ -146,15 +568,8 @@ function Header({ screen, setScreen, session, profile, onLogout }) {
   );
 }
 
-function Home({ setScreen }) {
-  const popularTasks = [
-    "Собрать мебель",
-    "Доставка по Риге",
-    "Помочь с переездом",
-    "Уборка квартиры",
-    "Дизайн баннера",
-    "Мелкий ремонт",
-  ];
+function Home({ setScreen, ui, lang }) {
+  const categories = localizedCategories(ui);
 
   return (
     <main className="bg-white">
@@ -167,15 +582,13 @@ function Home({ setScreen }) {
             transition={{ duration: 0.55 }}
             className="relative z-10"
           >
-            <Badge tone="green">Part:time · Латвия</Badge>
+            <Badge tone="green">{ui.homeBadge}</Badge>
 
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl">
-              Найди помощь рядом — или заработай в свободное время
+              {ui.homeTitle}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Part:time помогает быстро найти исполнителя для бытовых, курьерских и онлайн-задач в Латвии.
-            </p>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">{ui.homeSubtitle}</p>
 
             <div className="mt-8 rounded-[1.75rem] bg-white p-3 shadow-xl shadow-slate-200/70 ring-1 ring-slate-100">
               <div className="flex flex-col gap-3 md:flex-row">
@@ -183,19 +596,19 @@ function Home({ setScreen }) {
                   <span className="text-xl text-slate-400">{icons.search}</span>
                   <input
                     className="w-full bg-transparent text-sm outline-none"
-                    placeholder="Что нужно сделать? Например: собрать мебель, доставка, уборка"
+                    placeholder={ui.searchPlaceholder}
                     onFocus={() => setScreen("feed")}
                     readOnly
                   />
                 </div>
                 <Button onClick={() => setScreen("create")} className="h-14 px-7 text-base">
-                  Создать задание
+                  {ui.createTask}
                 </Button>
               </div>
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
-              {popularTasks.map((task) => (
+              {commonTasks[lang].map((task) => (
                 <button
                   key={task}
                   onClick={() => setScreen("feed")}
@@ -208,10 +621,10 @@ function Home({ setScreen }) {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button onClick={() => setScreen("create")} variant="green" className="h-14 px-7 text-base">
-                Мне нужна помощь
+                {ui.needHelp}
               </Button>
               <Button onClick={() => setScreen("feed")} variant="outline" className="h-14 px-7 text-base">
-                Найти подработку
+                {ui.findWork}
               </Button>
             </div>
           </motion.div>
@@ -226,32 +639,34 @@ function Home({ setScreen }) {
               <div className="rounded-[1.5rem] bg-white p-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-xs font-black uppercase tracking-wide text-slate-400">Пример задания</div>
-                    <h2 className="mt-1 text-2xl font-black text-slate-950">Помочь перевезти стол</h2>
+                    <div className="text-xs font-black uppercase tracking-wide text-slate-400">{ui.task}</div>
+                    <h2 className="mt-1 text-2xl font-black text-slate-950">
+                      {lang === "ru" ? "Помочь перевезти стол" : "Palīdzēt pārvest galdu"}
+                    </h2>
                   </div>
-                  <div className="rounded-2xl bg-emerald-100 px-4 py-3 text-2xl font-black text-emerald-700">
-                    €25
-                  </div>
+                  <div className="rounded-2xl bg-emerald-100 px-4 py-3 text-2xl font-black text-emerald-700">€25</div>
                 </div>
 
                 <div className="mt-5 grid gap-3">
                   <div className="rounded-3xl bg-slate-50 p-4">
-                    <div className="text-sm font-black text-slate-500">Где</div>
-                    <div className="mt-1 font-bold text-slate-950">Рига, Центр</div>
+                    <div className="text-sm font-black text-slate-500">{ui.city}</div>
+                    <div className="mt-1 font-bold text-slate-950">{lang === "ru" ? "Рига, Центр" : "Rīga, centrs"}</div>
                   </div>
                   <div className="rounded-3xl bg-slate-50 p-4">
-                    <div className="text-sm font-black text-slate-500">Когда</div>
-                    <div className="mt-1 font-bold text-slate-950">Сегодня после 18:00</div>
+                    <div className="text-sm font-black text-slate-500">{lang === "ru" ? "Когда" : "Kad"}</div>
+                    <div className="mt-1 font-bold text-slate-950">{lang === "ru" ? "Сегодня после 18:00" : "Šodien pēc 18:00"}</div>
                   </div>
                   <div className="rounded-3xl bg-slate-50 p-4">
-                    <div className="text-sm font-black text-slate-500">Отклики</div>
-                    <div className="mt-1 font-bold text-slate-950">3 исполнителя готовы помочь</div>
+                    <div className="text-sm font-black text-slate-500">{ui.applicationsCount}</div>
+                    <div className="mt-1 font-bold text-slate-950">
+                      {lang === "ru" ? "3 исполнителя готовы помочь" : "3 izpildītāji gatavi palīdzēt"}
+                    </div>
                   </div>
                 </div>
 
                 <div className="mt-5 rounded-3xl bg-indigo-50 p-4 text-sm leading-6 text-indigo-900">
-                  <div className="font-black">Безопаснее выбирать</div>
-                  Профили, рейтинги, отзывы и история заданий помогают принять решение.
+                  <div className="font-black">{ui.trustBadge}</div>
+                  {ui.trustText}
                 </div>
               </div>
             </div>
@@ -262,31 +677,24 @@ function Home({ setScreen }) {
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <h2 className="text-3xl font-black tracking-tight text-slate-950">Популярные категории</h2>
-            <p className="mt-2 text-slate-600">Быстрые задачи для людей и малого бизнеса.</p>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">{ui.popularCategories}</h2>
+            <p className="mt-2 text-slate-600">{ui.popularCategoriesText}</p>
           </div>
           <Button onClick={() => setScreen("feed")} variant="outline">
-            Смотреть задания
+            {ui.viewTasks}
           </Button>
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Дом и ремонт", icons.home, "Сборка мебели, мелкий ремонт, помощь по дому"],
-            ["Доставка и поручения", icons.truck, "Документы, покупки, небольшие доставки"],
-            ["Физическая помощь", icons.hammer, "Переезды, перенос вещей, сезонные работы"],
-            ["Онлайн-задачи", icons.laptop, "Дизайн, тексты, IT-помощь, соцсети"],
-          ].map(([title, icon, text]) => (
+          {categories.map((category) => (
             <button
-              key={title}
+              key={category.label}
               onClick={() => setScreen("feed")}
               className="rounded-[1.5rem] border border-slate-100 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl">
-                {icon}
-              </div>
-              <h3 className="mt-5 text-lg font-black">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl">{category.icon}</div>
+              <h3 className="mt-5 text-lg font-black">{category.label}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{category.text}</p>
             </button>
           ))}
         </div>
@@ -295,15 +703,15 @@ function Home({ setScreen }) {
       <section className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-black tracking-tight text-slate-950">Как это работает</h2>
-            <p className="mt-2 text-slate-600">Минимум шагов — от задачи до исполнителя.</p>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">{ui.howItWorks}</h2>
+            <p className="mt-2 text-slate-600">{ui.howItWorksText}</p>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {[
-              ["1", "Опишите задачу", "Укажите, что нужно сделать, где, когда и за какой бюджет."],
-              ["2", "Получите отклики", "Исполнители видят задание и отправляют свои предложения."],
-              ["3", "Выберите исполнителя", "Сравните профили, отзывы и договоритесь в чате."],
+              ["1", ui.step1Title, ui.step1Text],
+              ["2", ui.step2Title, ui.step2Text],
+              ["3", ui.step3Title, ui.step3Text],
             ].map(([number, title, text]) => (
               <div key={title} className="rounded-[1.75rem] bg-white p-7 shadow-sm">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">
@@ -320,15 +728,13 @@ function Home({ setScreen }) {
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-6 rounded-[2rem] bg-slate-950 p-8 text-white lg:grid-cols-[1fr_0.8fr] lg:p-10">
           <div>
-            <Badge tone="green">Доверие</Badge>
-            <h2 className="mt-5 text-3xl font-black tracking-tight">Выбирайте людей, а не случайные объявления</h2>
-            <p className="mt-4 max-w-2xl leading-8 text-slate-300">
-              У каждого пользователя есть профиль, отзывы, рейтинг и история взаимодействий. Это делает локальные задачи понятнее и безопаснее.
-            </p>
+            <Badge tone="green">{ui.trustBadge}</Badge>
+            <h2 className="mt-5 text-3xl font-black tracking-tight">{ui.trustTitle}</h2>
+            <p className="mt-4 max-w-2xl leading-8 text-slate-300">{ui.trustText}</p>
           </div>
 
           <div className="grid gap-3">
-            {["Проверенный профиль", "Отзывы после задания", "Чат с исполнителем"].map((item) => (
+            {[ui.verifiedProfile, ui.reviewsAfterTask, ui.chatWithPerformer].map((item) => (
               <div key={item} className="rounded-3xl bg-white/10 p-4 font-bold">
                 ✓ {item}
               </div>
@@ -339,17 +745,18 @@ function Home({ setScreen }) {
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl rounded-[2rem] bg-indigo-50 p-8 text-center">
-          <h2 className="text-3xl font-black tracking-tight text-slate-950">Готовы попробовать?</h2>
-          <p className="mt-3 text-slate-600">Создайте первое задание за 1 минуту.</p>
+          <h2 className="text-3xl font-black tracking-tight text-slate-950">{ui.readyTry}</h2>
+          <p className="mt-3 text-slate-600">{ui.firstTaskMinute}</p>
           <Button onClick={() => setScreen("create")} className="mt-6 h-14 px-8 text-base">
-            Создать задание
+            {ui.createTask}
           </Button>
         </div>
       </section>
     </main>
   );
 }
-function Auth({ onAuthReady, setScreen }) {
+
+function Auth({ onAuthReady, setScreen, ui }) {
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({ email: "", password: "", fullName: "", phone: "", city: "Рига", role: "both" });
   const [message, setMessage] = useState("");
@@ -361,7 +768,7 @@ function Auth({ onAuthReady, setScreen }) {
 
     try {
       if (!isSupabaseConfigured) {
-        setMessage("Supabase не подключён. Заполните .env: VITE_SUPABASE_URL и VITE_SUPABASE_ANON_KEY.");
+        setMessage(ui.authMissingSupabase);
         return;
       }
 
@@ -392,7 +799,7 @@ function Auth({ onAuthReady, setScreen }) {
         }
 
         if (!data.session) {
-          setMessage("Аккаунт создан. Если включено подтверждение email, проверьте почту.");
+          setMessage(ui.authCreatedEmail);
           return;
         }
 
@@ -410,7 +817,7 @@ function Auth({ onAuthReady, setScreen }) {
         setScreen("profile");
       }
     } catch (error) {
-      setMessage(error.message || "Ошибка авторизации");
+      setMessage(error.message || "Auth error");
     } finally {
       setLoading(false);
     }
@@ -420,11 +827,9 @@ function Auth({ onAuthReady, setScreen }) {
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_460px] lg:px-8">
         <section className="rounded-[2rem] bg-slate-950 p-8 text-white">
-          <Badge tone="blue">Аккаунт и доверие</Badge>
-          <h1 className="mt-5 text-4xl font-black">Регистрация нужна для безопасности</h1>
-          <p className="mt-4 leading-8 text-slate-300">
-            Профиль, рейтинг, отзывы и история взаимодействий создают доверие между заказчиком и исполнителем.
-          </p>
+          <Badge tone="blue">{ui.authBadge}</Badge>
+          <h1 className="mt-5 text-4xl font-black">{ui.authTitle}</h1>
+          <p className="mt-4 leading-8 text-slate-300">{ui.authText}</p>
         </section>
 
         <section className="rounded-[2rem] bg-white p-6 shadow-sm sm:p-8">
@@ -433,17 +838,17 @@ function Auth({ onAuthReady, setScreen }) {
               onClick={() => setMode("login")}
               className={`flex-1 rounded-xl px-4 py-3 text-sm font-black ${mode === "login" ? "bg-white shadow-sm" : "text-slate-500"}`}
             >
-              Вход
+              {ui.authLoginTab}
             </button>
             <button
               onClick={() => setMode("register")}
               className={`flex-1 rounded-xl px-4 py-3 text-sm font-black ${mode === "register" ? "bg-white shadow-sm" : "text-slate-500"}`}
             >
-              Регистрация
+              {ui.authRegisterTab}
             </button>
           </div>
 
-          <h2 className="mt-6 text-3xl font-black">{mode === "login" ? "Войти" : "Создать аккаунт"}</h2>
+          <h2 className="mt-6 text-3xl font-black">{mode === "login" ? ui.authLoginTitle : ui.authRegisterTitle}</h2>
 
           <div className="mt-6 grid gap-4">
             {mode === "register" && (
@@ -451,19 +856,19 @@ function Auth({ onAuthReady, setScreen }) {
                 <input
                   value={form.fullName}
                   onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                  placeholder="Имя"
+                  placeholder={ui.name}
                   className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
                 />
                 <input
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  placeholder="Телефон"
+                  placeholder={ui.phone}
                   className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
                 />
                 <input
                   value={form.city}
                   onChange={(e) => setForm({ ...form, city: e.target.value })}
-                  placeholder="Город"
+                  placeholder={ui.city}
                   className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
                 />
                 <select
@@ -471,9 +876,9 @@ function Auth({ onAuthReady, setScreen }) {
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
                   className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
                 >
-                  <option value="both">Заказчик и исполнитель</option>
-                  <option value="customer">Только заказчик</option>
-                  <option value="performer">Только исполнитель</option>
+                  <option value="both">{ui.roleBoth}</option>
+                  <option value="customer">{ui.roleCustomer}</option>
+                  <option value="performer">{ui.rolePerformer}</option>
                 </select>
               </>
             )}
@@ -481,21 +886,21 @@ function Auth({ onAuthReady, setScreen }) {
             <input
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              placeholder="Email"
+              placeholder={ui.email}
               className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
             />
             <input
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              placeholder="Пароль"
+              placeholder={ui.password}
               className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
             />
 
             {message && <div className="rounded-2xl bg-indigo-50 p-4 text-sm font-bold leading-6 text-indigo-800">{message}</div>}
 
             <Button onClick={submit} disabled={loading} className="h-14 text-base">
-              {loading ? "Подождите..." : mode === "login" ? "Войти" : "Зарегистрироваться"}
+              {loading ? ui.wait : mode === "login" ? ui.login : ui.register}
             </Button>
           </div>
         </section>
@@ -504,7 +909,7 @@ function Auth({ onAuthReady, setScreen }) {
   );
 }
 
-function Feed({ tasks, profiles, setSelectedTask, setScreen }) {
+function Feed({ tasks, profiles, setSelectedTask, setScreen, ui }) {
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
@@ -517,17 +922,17 @@ function Feed({ tasks, profiles, setSelectedTask, setScreen }) {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <h1 className="text-4xl font-black">Лента заданий</h1>
-            <p className="mt-2 text-slate-600">Данные загружаются из Supabase.</p>
+            <h1 className="text-4xl font-black">{ui.feedTitle}</h1>
+            <p className="mt-2 text-slate-600">{ui.feedSubtitle}</p>
           </div>
-          <Button onClick={() => setScreen("create")}>+ Создать задание</Button>
+          <Button onClick={() => setScreen("create")}>+ {ui.createTask}</Button>
         </div>
 
         <div className="mt-6 rounded-[1.5rem] bg-white p-3 shadow-sm">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Поиск: доставка, уборка, дизайн..."
+            placeholder={ui.searchPlaceholder}
             className="w-full rounded-2xl bg-slate-50 px-4 py-3 outline-none"
           />
         </div>
@@ -547,7 +952,7 @@ function Feed({ tasks, profiles, setSelectedTask, setScreen }) {
                 </div>
                 <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-slate-500">
                   <span>{icons.map} {task.city}</span>
-                  <span>Заказчик: {owner?.full_name || "Пользователь"}</span>
+                  <span>{ui.customer}: {owner?.full_name || "User"}</span>
                 </div>
                 <div className="mt-5 flex gap-3">
                   <Button
@@ -557,7 +962,7 @@ function Feed({ tasks, profiles, setSelectedTask, setScreen }) {
                     }}
                     className="flex-1"
                   >
-                    Подробнее
+                    {ui.details}
                   </Button>
                 </div>
               </div>
@@ -569,20 +974,28 @@ function Feed({ tasks, profiles, setSelectedTask, setScreen }) {
   );
 }
 
-function CreateTask({ session, setScreen, refreshTasks }) {
-  const [form, setForm] = useState({ title: "", category: "Помощь по дому", city: "Рига", price: "", description: "" });
+function CreateTask({ session, setScreen, refreshTasks, ui, lang }) {
+  const categories = localizedCategories(ui);
+  const [form, setForm] = useState({ title: "", category: categories[0].label, city: lang === "ru" ? "Рига" : "Rīga", price: "", description: "" });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setForm((current) => ({
+      ...current,
+      category: categories.some((category) => category.label === current.category) ? current.category : categories[0].label,
+    }));
+  }, [lang]);
 
   if (!session) {
     return (
       <main className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-12">
           <div className="rounded-[2rem] bg-white p-8 text-center shadow-sm">
-            <h1 className="text-3xl font-black">Сначала нужна регистрация</h1>
-            <p className="mt-3 text-slate-600">Чтобы создать задание, нужен аккаунт Part:time.</p>
+            <h1 className="text-3xl font-black">{ui.createNeedLoginTitle}</h1>
+            <p className="mt-3 text-slate-600">{ui.createNeedLoginText}</p>
             <Button onClick={() => setScreen("auth")} className="mt-6">
-              Войти / зарегистрироваться
+              {ui.createNeedLoginButton}
             </Button>
           </div>
         </div>
@@ -596,14 +1009,14 @@ function CreateTask({ session, setScreen, refreshTasks }) {
 
     try {
       const price = Number(form.price);
-      if (!form.title.trim()) throw new Error("Напишите, что нужно сделать.");
-      if (!price || price <= 0) throw new Error("Укажите бюджет больше 0 €.");
+      if (!form.title.trim()) throw new Error(ui.errorTaskTitle);
+      if (!price || price <= 0) throw new Error(ui.errorTaskPrice);
 
       const { error } = await supabase.from("tasks").insert({
         customer_id: session.user.id,
         title: form.title.trim(),
         category: form.category,
-        city: form.city.trim() || "Рига",
+        city: form.city.trim() || (lang === "ru" ? "Рига" : "Rīga"),
         price,
         description: form.description.trim(),
         status: "open",
@@ -624,14 +1037,14 @@ function CreateTask({ session, setScreen, refreshTasks }) {
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-3xl px-4 py-8">
         <div className="rounded-[2rem] bg-white p-6 shadow-sm sm:p-8">
-          <Badge tone="green">Supabase insert</Badge>
-          <h1 className="mt-4 text-4xl font-black">Создать задание</h1>
+          <Badge tone="green">{ui.createBadge}</Badge>
+          <h1 className="mt-4 text-4xl font-black">{ui.createTitle}</h1>
 
           <div className="mt-8 grid gap-5">
             <input
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              placeholder="Что нужно сделать?"
+              placeholder={ui.titlePlaceholder}
               className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
             />
             <select
@@ -647,14 +1060,14 @@ function CreateTask({ session, setScreen, refreshTasks }) {
               <input
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
-                placeholder="Город"
+                placeholder={ui.city}
                 className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
               />
               <input
                 type="number"
                 value={form.price}
                 onChange={(e) => setForm({ ...form, price: e.target.value })}
-                placeholder="Бюджет, €"
+                placeholder={ui.budgetPlaceholder}
                 className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
               />
             </div>
@@ -662,12 +1075,12 @@ function CreateTask({ session, setScreen, refreshTasks }) {
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={5}
-              placeholder="Детали"
+              placeholder={ui.descriptionPlaceholder}
               className="rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-indigo-500"
             />
             {message && <div className="rounded-2xl bg-red-50 p-4 text-sm font-bold text-red-700">{message}</div>}
             <Button onClick={submit} disabled={loading} className="h-14 text-base">
-              {loading ? "Публикуем..." : "Опубликовать задание"}
+              {loading ? ui.publishing : ui.publishTask}
             </Button>
           </div>
         </div>
@@ -676,7 +1089,7 @@ function CreateTask({ session, setScreen, refreshTasks }) {
   );
 }
 
-function TaskDetails({ task, session, setScreen, refreshApplications }) {
+function TaskDetails({ task, session, setScreen, refreshApplications, ui }) {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
@@ -691,7 +1104,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
     setStatus("");
 
     if (!message.trim()) {
-      setStatus("Напишите короткое сообщение для заказчика.");
+      setStatus(ui.emptyApplication);
       return;
     }
 
@@ -704,7 +1117,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
 
     if (error) {
       if (error.message.includes("duplicate key")) {
-        setStatus("Вы уже откликнулись на это задание.");
+        setStatus(ui.duplicateApplication);
       } else {
         setStatus(error.message);
       }
@@ -712,7 +1125,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
     }
 
     setMessage("");
-    setStatus("Отклик отправлен.");
+    setStatus(ui.applicationSent);
     await refreshApplications();
   }
 
@@ -721,7 +1134,7 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[1fr_360px] lg:px-8">
         <section className="rounded-[2rem] bg-white p-6 shadow-sm sm:p-8">
           <button onClick={() => setScreen("feed")} className="text-sm font-bold text-indigo-600">
-            ← Назад к заданиям
+            {ui.backToTasks}
           </button>
 
           <div className="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
@@ -737,17 +1150,17 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
           </div>
 
           <div className="mt-8 border-t border-slate-100 pt-8">
-            <h2 className="text-xl font-black">Описание</h2>
-            <p className="mt-3 max-w-3xl leading-8 text-slate-600">{task.description || "Описание не добавлено."}</p>
+            <h2 className="text-xl font-black">{ui.description}</h2>
+            <p className="mt-3 max-w-3xl leading-8 text-slate-600">{task.description || ui.noDescription}</p>
           </div>
         </section>
 
         <aside className="rounded-[2rem] bg-white p-6 shadow-sm">
-          <h3 className="text-lg font-black">Откликнуться</h3>
+          <h3 className="text-lg font-black">{ui.applyTitle}</h3>
 
           {!session && (
             <div className="mt-4 rounded-2xl bg-indigo-50 p-4 text-sm font-bold leading-6 text-indigo-800">
-              Чтобы откликнуться, нужно войти.
+              {ui.applyLoginNotice}
             </div>
           )}
 
@@ -756,11 +1169,11 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
             onChange={(e) => setMessage(e.target.value)}
             rows={4}
             className="mt-4 w-full rounded-2xl border border-slate-200 p-4 outline-none focus:border-indigo-500"
-            placeholder="Напишите коротко, когда можете выполнить задачу."
+            placeholder={ui.applyPlaceholder}
           />
 
           <Button onClick={apply} className="mt-3 h-12 w-full">
-            {icons.send} Отправить отклик
+            {icons.send} {ui.sendApplication}
           </Button>
 
           {status && <div className="mt-4 rounded-2xl bg-emerald-50 p-4 text-sm font-bold text-emerald-800">{status}</div>}
@@ -770,8 +1183,9 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
   );
 }
 
-function Chats({ session, messages, setMessages, selectedChatTask, profiles, tasks, setScreen, setSelectedChatTask }) {
+function Chats({ session, messages, setMessages, selectedChatTask, profiles, tasks, setScreen, setSelectedChatTask, ui, lang }) {
   const [draft, setDraft] = useState("");
+  const [autoTranslate, setAutoTranslate] = useState(true);
   const activeTask = selectedChatTask || null;
 
   const chatMessages = useMemo(() => {
@@ -816,9 +1230,9 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
       <main className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-12">
           <div className="rounded-[2rem] bg-white p-8 text-center shadow-sm">
-            <h1 className="text-3xl font-black">Чат доступен после входа</h1>
+            <h1 className="text-3xl font-black">{ui.chatNeedsLogin}</h1>
             <Button onClick={() => setScreen("auth")} className="mt-6">
-              Войти
+              {ui.login}
             </Button>
           </div>
         </div>
@@ -835,16 +1249,12 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
       <main className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
           <section className="rounded-[2rem] bg-white p-6 shadow-sm">
-            <h1 className="text-3xl font-black">Чаты</h1>
-            <p className="mt-2 text-slate-600">
-              Чат появляется после того, как заказчик выбрал исполнителя.
-            </p>
+            <h1 className="text-3xl font-black">{ui.chatsTitle}</h1>
+            <p className="mt-2 text-slate-600">{ui.chatAfterAccept}</p>
 
             <div className="mt-6 grid gap-3">
               {chatTasks.length === 0 ? (
-                <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">
-                  Пока нет активных чатов. Выберите исполнителя в откликах или дождитесь выбора по вашему отклику.
-                </div>
+                <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">{ui.noChats}</div>
               ) : (
                 chatTasks.map((task) => {
                   const customer = profiles[task.customer_id];
@@ -861,7 +1271,7 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
                     >
                       <div className="font-black">{task.title}</div>
                       <div className="mt-2 text-sm text-slate-500">
-                        Заказчик: {customer?.full_name || "Пользователь"} · Исполнитель: {performer?.full_name || "Пользователь"}
+                        {ui.customer}: {customer?.full_name || "User"} · {ui.performer}: {performer?.full_name || "User"}
                       </div>
                     </button>
                   );
@@ -878,18 +1288,29 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[320px_1fr] lg:px-8">
         <aside className="rounded-[2rem] bg-white p-5 shadow-sm">
-          <h1 className="text-2xl font-black">Чаты</h1>
-          <p className="mt-1 text-sm text-slate-500">Диалог по выбранному заданию.</p>
+          <h1 className="text-2xl font-black">{ui.chatsTitle}</h1>
+          <p className="mt-1 text-sm text-slate-500">{ui.taskChat}</p>
 
           <div className="mt-5 rounded-3xl bg-indigo-50 p-4">
             <div className="font-black text-indigo-950">{activeTask.title}</div>
             <div className="mt-1 text-sm text-indigo-700">
-              Собеседник: {otherUser?.full_name || "Пользователь"}
+              {ui.interlocutor}: {otherUser?.full_name || "User"}
             </div>
           </div>
 
+          <button
+            onClick={() => setAutoTranslate((current) => !current)}
+            className="mt-4 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700 hover:bg-slate-50"
+          >
+            {autoTranslate ? ui.autoTranslateOn : ui.autoTranslateOff}
+          </button>
+
+          <div className="mt-3 rounded-2xl bg-slate-50 p-3 text-xs leading-5 text-slate-500">
+            {ui.demoTranslationNotice}
+          </div>
+
           <Button onClick={() => setScreen("profile")} variant="outline" className="mt-4 w-full">
-            Назад в профиль
+            {ui.backToProfile}
           </Button>
         </aside>
 
@@ -897,27 +1318,33 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
           <div className="border-b border-slate-100 p-5">
             <div className="font-black">{activeTask.title}</div>
             <div className="mt-1 text-sm text-slate-500">
-              Задание · {activeTask.city} · €{activeTask.price}
+              {ui.task} · {activeTask.city} · €{activeTask.price}
             </div>
           </div>
 
           <div className="flex-1 space-y-3 overflow-y-auto p-5">
             {chatMessages.length === 0 ? (
-              <div className="rounded-3xl bg-slate-50 p-5 text-center text-slate-500">
-                Пока нет сообщений. Напишите первым.
-              </div>
+              <div className="rounded-3xl bg-slate-50 p-5 text-center text-slate-500">{ui.noMessages}</div>
             ) : (
               chatMessages.map((m) => {
                 const mine = m.sender_id === session.user.id;
                 const sender = profiles[m.sender_id];
+                const translated = autoTranslate && !mine ? translateDemo(m.body, lang) : null;
 
                 return (
                   <div key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[80%] rounded-3xl p-4 ${mine ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-900"}`}>
                       <div className="text-xs font-black opacity-70">
-                        {mine ? "Вы" : sender?.full_name || "Пользователь"}
+                        {mine ? ui.you : sender?.full_name || "User"}
                       </div>
                       <div className="mt-2 leading-6">{m.body}</div>
+
+                      {translated && (
+                        <div className={`mt-3 rounded-2xl p-3 text-sm leading-6 ${mine ? "bg-white/10 text-white" : "bg-white text-slate-700"}`}>
+                          <div className="mb-1 text-xs font-black opacity-70">{ui.autoTranslation}</div>
+                          {translated}
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -934,7 +1361,7 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
                   if (e.key === "Enter") sendMessage();
                 }}
                 className="flex-1 bg-transparent px-3 outline-none"
-                placeholder="Написать сообщение..."
+                placeholder={ui.writeMessage}
               />
               <Button onClick={sendMessage} disabled={!draft.trim()}>
                 {icons.send}
@@ -947,7 +1374,7 @@ function Chats({ session, messages, setMessages, selectedChatTask, profiles, tas
   );
 }
 
-function Profile({ session, profile, setProfile, reviews, setScreen, tasks, applications, profiles, refreshApplications, refreshTasks, setSelectedChatTask }) {
+function Profile({ session, profile, setProfile, reviews, setScreen, tasks, applications, profiles, refreshApplications, refreshTasks, setSelectedChatTask, ui }) {
   const [draft, setDraft] = useState(profile || {});
   const [status, setStatus] = useState("");
 
@@ -958,9 +1385,9 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
       <main className="min-h-screen bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 py-12">
           <div className="rounded-[2rem] bg-white p-8 text-center shadow-sm">
-            <h1 className="text-3xl font-black">Профиль доступен после входа</h1>
+            <h1 className="text-3xl font-black">{ui.profileLoginTitle}</h1>
             <Button onClick={() => setScreen("auth")} className="mt-6">
-              Войти
+              {ui.login}
             </Button>
           </div>
         </div>
@@ -978,7 +1405,7 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      setStatus("Выберите изображение.");
+      setStatus(ui.chooseImage);
       return;
     }
 
@@ -1017,7 +1444,7 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
     if (error) setStatus(error.message);
     else {
       setProfile(data);
-      setStatus("Профиль сохранён.");
+      setStatus(ui.profileSaved);
     }
   }
 
@@ -1026,12 +1453,12 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
       reviewee_id: session.user.id,
       reviewer_id: session.user.id,
       rating: 5,
-      text: "Демо-отзыв: пользователь выполнил задачу вовремя и качественно.",
+      text: ui.demoReviewAdded,
       task_id: null,
     });
 
     if (error) setStatus(error.message);
-    else setStatus("Демо-отзыв добавлен. Обновите страницу или профиль.");
+    else setStatus(ui.demoReviewAdded);
   }
 
   async function acceptApplication(application) {
@@ -1070,7 +1497,7 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
       });
     }
 
-    setStatus("Исполнитель выбран. Теперь можно открыть чат.");
+    setStatus(ui.performerSelected);
     await refreshApplications();
     await refreshTasks();
   }
@@ -1080,10 +1507,10 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <h1 className="text-4xl font-black">Профиль и доверие</h1>
-            <p className="mt-2 text-slate-600">Профиль, фото, рейтинг, отзывы и отклики сохраняются в Supabase.</p>
+            <h1 className="text-4xl font-black">{ui.profileTitle}</h1>
+            <p className="mt-2 text-slate-600">{ui.profileSubtitle}</p>
           </div>
-          <Badge tone={draft?.verified ? "green" : "orange"}>{draft?.verified ? "Профиль проверен" : "Требуется проверка"}</Badge>
+          <Badge tone={draft?.verified ? "green" : "orange"}>{draft?.verified ? ui.profileVerified : ui.profileNeedsVerify}</Badge>
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[380px_1fr]">
@@ -1092,31 +1519,31 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
               <Avatar profile={draft} size="lg" />
               <div>
                 <div className="text-2xl font-black">{draft?.full_name || session.user.email}</div>
-                <div className="mt-1 text-sm text-slate-500">{draft?.city || "Рига"} · {draft?.phone || "телефон не указан"}</div>
+                <div className="mt-1 text-sm text-slate-500">{draft?.city || "Rīga"} · {draft?.phone || ui.phoneUnknown}</div>
                 <div className="mt-2 flex items-center gap-2">
                   <span className="text-amber-400">★★★★★</span>
                   <span className="font-black">{rating}</span>
-                  <span className="text-sm text-slate-500">({myReviews.length} отзывов)</span>
+                  <span className="text-sm text-slate-500">({myReviews.length} {ui.ratingReviews})</span>
                 </div>
               </div>
             </div>
           </section>
 
           <section className="rounded-[2rem] bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-black">Редактировать аккаунт</h2>
+            <h2 className="text-2xl font-black">{ui.editProfile}</h2>
 
             <div className="mt-5 rounded-3xl bg-slate-50 p-4">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-4">
                   <Avatar profile={draft} size="lg" />
                   <div>
-                    <div className="font-black">Фото профиля</div>
-                    <div className="mt-1 text-sm leading-6 text-slate-500">Загружается в Supabase Storage bucket avatars.</div>
+                    <div className="font-black">{ui.avatarTitle}</div>
+                    <div className="mt-1 text-sm leading-6 text-slate-500">{ui.avatarText}</div>
                   </div>
                 </div>
 
                 <label className="inline-flex cursor-pointer items-center justify-center rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-black text-white hover:bg-indigo-700">
-                  Загрузить фото
+                  {ui.uploadPhoto}
                   <input type="file" accept="image/*" onChange={uploadAvatar} className="hidden" />
                 </label>
               </div>
@@ -1126,19 +1553,19 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
               <input
                 value={draft?.full_name || ""}
                 onChange={(e) => setDraft({ ...draft, full_name: e.target.value })}
-                placeholder="Имя"
+                placeholder={ui.name}
                 className="rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
               />
               <input
                 value={draft?.phone || ""}
                 onChange={(e) => setDraft({ ...draft, phone: e.target.value })}
-                placeholder="Телефон"
+                placeholder={ui.phone}
                 className="rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
               />
               <input
                 value={draft?.city || ""}
                 onChange={(e) => setDraft({ ...draft, city: e.target.value })}
-                placeholder="Город"
+                placeholder={ui.city}
                 className="rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
               />
               <select
@@ -1146,26 +1573,26 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                 onChange={(e) => setDraft({ ...draft, role: e.target.value })}
                 className="rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500"
               >
-                <option value="both">Заказчик и исполнитель</option>
-                <option value="customer">Только заказчик</option>
-                <option value="performer">Только исполнитель</option>
+                <option value="both">{ui.roleBoth}</option>
+                <option value="customer">{ui.roleCustomer}</option>
+                <option value="performer">{ui.rolePerformer}</option>
               </select>
               <textarea
                 value={draft?.bio || ""}
                 onChange={(e) => setDraft({ ...draft, bio: e.target.value })}
-                placeholder="О себе"
+                placeholder={ui.bio}
                 rows={4}
                 className="rounded-2xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-500 sm:col-span-2"
               />
             </div>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              <Button onClick={saveProfile}>Сохранить профиль</Button>
+              <Button onClick={saveProfile}>{ui.saveProfile}</Button>
               <Button onClick={() => setDraft({ ...draft, verified: true })} variant="outline">
-                Демо: пройти проверку
+                {ui.demoVerify}
               </Button>
               <Button onClick={addDemoReview} variant="outline">
-                Демо: добавить отзыв
+                {ui.demoReview}
               </Button>
             </div>
 
@@ -1176,19 +1603,15 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
         <section className="mt-6 rounded-[2rem] bg-white p-6 shadow-sm">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-2xl font-black">Отклики на мои задания</h2>
-              <p className="mt-2 text-sm text-slate-500">
-                Здесь заказчик видит, кто откликнулся на его опубликованные задания.
-              </p>
+              <h2 className="text-2xl font-black">{ui.applicationsTitle}</h2>
+              <p className="mt-2 text-sm text-slate-500">{ui.applicationsSubtitle}</p>
             </div>
-            <Badge tone="blue">{applicationsForMyTasks.length} откликов</Badge>
+            <Badge tone="blue">{applicationsForMyTasks.length} {ui.applicationsCount}</Badge>
           </div>
 
           <div className="mt-5 grid gap-4">
             {applicationsForMyTasks.length === 0 ? (
-              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">
-                Пока нет откликов на ваши задания.
-              </div>
+              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">{ui.noApplications}</div>
             ) : (
               applicationsForMyTasks.map((application) => {
                 const relatedTask = tasks.find((task) => task.id === application.task_id);
@@ -1198,32 +1621,32 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                   <div key={application.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-5">
                     <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                       <div>
-                        <div className="text-xs font-black uppercase tracking-wide text-slate-400">Задание</div>
-                        <div className="mt-1 text-lg font-black">{relatedTask?.title || "Задание удалено"}</div>
+                        <div className="text-xs font-black uppercase tracking-wide text-slate-400">{ui.task}</div>
+                        <div className="mt-1 text-lg font-black">{relatedTask?.title || ui.deletedTask}</div>
 
                         <div className="mt-4 flex items-center gap-3">
                           <Avatar profile={performer} size="md" />
                           <div>
-                            <div className="font-black">{performer?.full_name || "Исполнитель"}</div>
+                            <div className="font-black">{performer?.full_name || ui.performer}</div>
                             <div className="text-sm text-slate-500">
-                              {performer?.city || "Город не указан"} · {performer?.phone || "телефон не указан"}
+                              {performer?.city || ui.cityUnknown} · {performer?.phone || ui.phoneUnknown}
                             </div>
                           </div>
                         </div>
 
                         <div className="mt-4 rounded-2xl bg-white p-4 text-sm leading-6 text-slate-700">
-                          {application.message || "Без сообщения"}
+                          {application.message || ui.noMessage}
                         </div>
                       </div>
 
                       <div className="flex min-w-[190px] flex-col gap-2">
                         <Badge tone={application.status === "accepted" ? "green" : "orange"}>
-                          {application.status === "accepted" ? "Выбран" : "Ожидает решения"}
+                          {application.status === "accepted" ? ui.accepted : ui.waitingDecision}
                         </Badge>
 
                         {application.status !== "accepted" && (
                           <Button onClick={() => acceptApplication(application)} className="mt-2">
-                            Выбрать исполнителя
+                            {ui.acceptPerformer}
                           </Button>
                         )}
 
@@ -1239,7 +1662,7 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                             }}
                             className="mt-2"
                           >
-                            Открыть чат
+                            {ui.openChat}
                           </Button>
                         )}
                       </div>
@@ -1254,18 +1677,14 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
         <section className="mt-6 rounded-[2rem] bg-white p-6 shadow-sm">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-2xl font-black">Мои принятые задания</h2>
-              <p className="mt-2 text-sm text-slate-500">
-                Здесь исполнитель видит задания, где его выбрал заказчик.
-              </p>
+              <h2 className="text-2xl font-black">{ui.acceptedTasksTitle}</h2>
+              <p className="mt-2 text-sm text-slate-500">{ui.acceptedTasksSubtitle}</p>
             </div>
           </div>
 
           <div className="mt-5 grid gap-4">
             {applications.filter((application) => application.performer_id === session.user.id && application.status === "accepted").length === 0 ? (
-              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">
-                Пока вас не выбрали исполнителем.
-              </div>
+              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">{ui.noAcceptedTasks}</div>
             ) : (
               applications
                 .filter((application) => application.performer_id === session.user.id && application.status === "accepted")
@@ -1277,9 +1696,9 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                     <div key={application.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-5">
                       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                         <div>
-                          <div className="text-lg font-black">{relatedTask?.title || "Задание"}</div>
+                          <div className="text-lg font-black">{relatedTask?.title || ui.task}</div>
                           <div className="mt-2 text-sm text-slate-500">
-                            Заказчик: {customer?.full_name || "Пользователь"} · {relatedTask?.city || "Город не указан"}
+                            {ui.customer}: {customer?.full_name || "User"} · {relatedTask?.city || ui.cityUnknown}
                           </div>
                         </div>
 
@@ -1290,7 +1709,7 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                               setScreen("chats");
                             }}
                           >
-                            Открыть чат
+                            {ui.openChat}
                           </Button>
                         )}
                       </div>
@@ -1302,10 +1721,10 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
         </section>
 
         <section className="mt-6 rounded-[2rem] bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-black">Отзывы</h2>
+          <h2 className="text-2xl font-black">{ui.reviews}</h2>
           <div className="mt-4 grid gap-3">
             {myReviews.length === 0 ? (
-              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">Пока нет отзывов.</div>
+              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">{ui.noReviews}</div>
             ) : (
               myReviews.map((r) => (
                 <div key={r.id} className="rounded-3xl bg-slate-50 p-5">
@@ -1321,12 +1740,12 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
   );
 }
 
-function BottomNav({ screen, setScreen }) {
+function BottomNav({ screen, setScreen, ui }) {
   const items = [
-    ["feed", icons.briefcase, "Задания"],
-    ["create", icons.plus, "Создать"],
-    ["chats", icons.message, "Чаты"],
-    ["profile", icons.user, "Профиль"],
+    ["feed", icons.briefcase, ui.navFeed],
+    ["create", icons.plus, ui.navCreate],
+    ["chats", icons.message, ui.navChats],
+    ["profile", icons.user, ui.navProfile],
   ];
 
   return (
@@ -1351,6 +1770,13 @@ function BottomNav({ screen, setScreen }) {
 
 export default function ParttimeApp() {
   const [screen, setScreen] = useState("home");
+  const [lang, setLang] = useState(() => {
+    try {
+      return window.localStorage.getItem("parttime_lang") || "ru";
+    } catch {
+      return "ru";
+    }
+  });
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
   const [tasks, setTasks] = useState([]);
@@ -1360,6 +1786,14 @@ export default function ParttimeApp() {
   const [reviews, setReviews] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedChatTask, setSelectedChatTask] = useState(null);
+
+  const ui = TEXT[lang];
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("parttime_lang", lang);
+    } catch {}
+  }, [lang]);
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -1408,7 +1842,7 @@ export default function ParttimeApp() {
     setProfiles(byId);
 
     if (activeSession?.user?.id) {
-      setProfile(byId[activeSession.user.id] || { id: activeSession.user.id, full_name: activeSession.user.email, role: "both", city: "Рига" });
+      setProfile(byId[activeSession.user.id] || { id: activeSession.user.id, full_name: activeSession.user.email, role: "both", city: "Rīga" });
     }
   }
 
@@ -1426,25 +1860,39 @@ export default function ParttimeApp() {
     await supabase.auth.signOut();
     setSession(null);
     setProfile(null);
+    setSelectedChatTask(null);
     setScreen("home");
   }
 
   return (
     <div className="min-h-screen bg-white pb-20 font-sans text-slate-950 md:pb-0">
-      <Header screen={screen} setScreen={setScreen} session={session} profile={profile} onLogout={logout} />
+      <Header screen={screen} setScreen={setScreen} session={session} profile={profile} onLogout={logout} lang={lang} setLang={setLang} ui={ui} />
 
       {!isSupabaseConfigured && (
         <div className="bg-red-50 px-4 py-3 text-center text-sm font-bold text-red-700">
-          Supabase не подключён. Создайте .env на основе .env.example.
+          {ui.supabaseNotConnected}
         </div>
       )}
 
-      {screen === "home" && <Home setScreen={setScreen} />}
-      {screen === "auth" && <Auth onAuthReady={loadEverything} setScreen={setScreen} />}
-      {screen === "feed" && <Feed tasks={tasks} profiles={profiles} setSelectedTask={setSelectedTask} setScreen={setScreen} />}
-      {screen === "create" && <CreateTask session={session} setScreen={setScreen} refreshTasks={refreshTasks} />}
-      {screen === "task" && <TaskDetails task={selectedTask} session={session} setScreen={setScreen} refreshApplications={refreshApplications} />}
-      {screen === "chats" && <Chats session={session} messages={messages} setMessages={setMessages} selectedChatTask={selectedChatTask} profiles={profiles} tasks={tasks} setScreen={setScreen} setSelectedChatTask={setSelectedChatTask} />}
+      {screen === "home" && <Home setScreen={setScreen} ui={ui} lang={lang} />}
+      {screen === "auth" && <Auth onAuthReady={loadEverything} setScreen={setScreen} ui={ui} />}
+      {screen === "feed" && <Feed tasks={tasks} profiles={profiles} setSelectedTask={setSelectedTask} setScreen={setScreen} ui={ui} />}
+      {screen === "create" && <CreateTask session={session} setScreen={setScreen} refreshTasks={refreshTasks} ui={ui} lang={lang} />}
+      {screen === "task" && <TaskDetails task={selectedTask} session={session} setScreen={setScreen} refreshApplications={refreshApplications} ui={ui} />}
+      {screen === "chats" && (
+        <Chats
+          session={session}
+          messages={messages}
+          setMessages={setMessages}
+          selectedChatTask={selectedChatTask}
+          profiles={profiles}
+          tasks={tasks}
+          setScreen={setScreen}
+          setSelectedChatTask={setSelectedChatTask}
+          ui={ui}
+          lang={lang}
+        />
+      )}
       {screen === "profile" && (
         <Profile
           session={session}
@@ -1458,10 +1906,11 @@ export default function ParttimeApp() {
           refreshApplications={refreshApplications}
           refreshTasks={refreshTasks}
           setSelectedChatTask={setSelectedChatTask}
+          ui={ui}
         />
       )}
 
-      <BottomNav screen={screen} setScreen={setScreen} />
+      <BottomNav screen={screen} setScreen={setScreen} ui={ui} />
     </div>
   );
 }
