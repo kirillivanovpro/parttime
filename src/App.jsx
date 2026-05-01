@@ -147,62 +147,208 @@ function Header({ screen, setScreen, session, profile, onLogout }) {
 }
 
 function Home({ setScreen }) {
-  return (
-    <main>
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 text-white">
-        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-indigo-500/30 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-emerald-400/20 blur-3xl" />
+  const popularTasks = [
+    "Собрать мебель",
+    "Доставка по Риге",
+    "Помочь с переездом",
+    "Уборка квартиры",
+    "Дизайн баннера",
+    "Мелкий ремонт",
+  ];
 
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-28">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            <Badge tone="blue">MVP + Supabase</Badge>
-            <h1 className="mt-6 max-w-3xl text-5xl font-black leading-tight tracking-tight sm:text-6xl">
-              Найди помощь или подработку рядом
+  return (
+    <main className="bg-white">
+      <section className="relative overflow-hidden bg-slate-50">
+        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-indigo-100 blur-3xl" />
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="relative z-10"
+          >
+            <Badge tone="green">Part:time · Латвия</Badge>
+
+            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl">
+              Найди помощь рядом — или заработай в свободное время
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">
-              Part:time соединяет людей, у которых есть задачи, с теми, у кого есть свободное время и желание заработать.
+
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+              Part:time помогает быстро найти исполнителя для бытовых, курьерских и онлайн-задач в Латвии.
             </p>
+
+            <div className="mt-8 rounded-[1.75rem] bg-white p-3 shadow-xl shadow-slate-200/70 ring-1 ring-slate-100">
+              <div className="flex flex-col gap-3 md:flex-row">
+                <div className="flex flex-1 items-center gap-3 rounded-2xl bg-slate-50 px-4 py-4">
+                  <span className="text-xl text-slate-400">{icons.search}</span>
+                  <input
+                    className="w-full bg-transparent text-sm outline-none"
+                    placeholder="Что нужно сделать? Например: собрать мебель, доставка, уборка"
+                    onFocus={() => setScreen("feed")}
+                    readOnly
+                  />
+                </div>
+                <Button onClick={() => setScreen("create")} className="h-14 px-7 text-base">
+                  Создать задание
+                </Button>
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {popularTasks.map((task) => (
+                <button
+                  key={task}
+                  onClick={() => setScreen("feed")}
+                  className="rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-600 shadow-sm ring-1 ring-slate-100 transition hover:bg-slate-950 hover:text-white"
+                >
+                  {task}
+                </button>
+              ))}
+            </div>
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button onClick={() => setScreen("create")} variant="green" className="h-14 px-7 text-base">
-                Создать задание
+                Мне нужна помощь
               </Button>
-              <Button onClick={() => setScreen("feed")} className="h-14 bg-white/10 px-7 text-base text-white hover:bg-white/20">
+              <Button onClick={() => setScreen("feed")} variant="outline" className="h-14 px-7 text-base">
                 Найти подработку
               </Button>
             </div>
           </motion.div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
-            <div className="rounded-[1.5rem] bg-slate-50 p-5 text-slate-950">
-              <h2 className="text-xl font-black">Что хранится в Supabase</h2>
-              <div className="mt-4 grid gap-3">
-                {["Пользователи и профили", "Фото аватаров", "Задания", "Отклики", "Сообщения", "Отзывы и рейтинг"].map((item) => (
-                  <div key={item} className="rounded-2xl bg-white p-4 font-bold shadow-sm">
-                    ✓ {item}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="relative z-10"
+          >
+            <div className="rounded-[2rem] bg-slate-950 p-4 shadow-2xl shadow-slate-300">
+              <div className="rounded-[1.5rem] bg-white p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-xs font-black uppercase tracking-wide text-slate-400">Пример задания</div>
+                    <h2 className="mt-1 text-2xl font-black text-slate-950">Помочь перевезти стол</h2>
                   </div>
-                ))}
+                  <div className="rounded-2xl bg-emerald-100 px-4 py-3 text-2xl font-black text-emerald-700">
+                    €25
+                  </div>
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <div className="text-sm font-black text-slate-500">Где</div>
+                    <div className="mt-1 font-bold text-slate-950">Рига, Центр</div>
+                  </div>
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <div className="text-sm font-black text-slate-500">Когда</div>
+                    <div className="mt-1 font-bold text-slate-950">Сегодня после 18:00</div>
+                  </div>
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <div className="text-sm font-black text-slate-500">Отклики</div>
+                    <div className="mt-1 font-bold text-slate-950">3 исполнителя готовы помочь</div>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-3xl bg-indigo-50 p-4 text-sm leading-6 text-indigo-900">
+                  <div className="font-black">Безопаснее выбирать</div>
+                  Профили, рейтинги, отзывы и история заданий помогают принять решение.
+                </div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">Популярные категории</h2>
+            <p className="mt-2 text-slate-600">Быстрые задачи для людей и малого бизнеса.</p>
+          </div>
+          <Button onClick={() => setScreen("feed")} variant="outline">
+            Смотреть задания
+          </Button>
+        </div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Дом и ремонт", icons.home, "Сборка мебели, мелкий ремонт, помощь по дому"],
+            ["Доставка и поручения", icons.truck, "Документы, покупки, небольшие доставки"],
+            ["Физическая помощь", icons.hammer, "Переезды, перенос вещей, сезонные работы"],
+            ["Онлайн-задачи", icons.laptop, "Дизайн, тексты, IT-помощь, соцсети"],
+          ].map(([title, icon, text]) => (
+            <button
+              key={title}
+              onClick={() => setScreen("feed")}
+              className="rounded-[1.5rem] border border-slate-100 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl">
+                {icon}
+              </div>
+              <h3 className="mt-5 text-lg font-black">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{text}</p>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">Как это работает</h2>
+            <p className="mt-2 text-slate-600">Минимум шагов — от задачи до исполнителя.</p>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              ["1", "Опишите задачу", "Укажите, что нужно сделать, где, когда и за какой бюджет."],
+              ["2", "Получите отклики", "Исполнители видят задание и отправляют свои предложения."],
+              ["3", "Выберите исполнителя", "Сравните профили, отзывы и договоритесь в чате."],
+            ].map(([number, title, text]) => (
+              <div key={title} className="rounded-[1.75rem] bg-white p-7 shadow-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">
+                  {number}
+                </div>
+                <h3 className="mt-5 text-xl font-black">{title}</h3>
+                <p className="mt-3 leading-7 text-slate-600">{text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-black">Категории задач</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category) => (
-            <div key={category.label} className="rounded-[1.5rem] border border-slate-100 bg-white p-6 shadow-sm">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-2xl">{category.icon}</div>
-              <h3 className="mt-5 text-lg font-black">{category.label}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500">Быстрые задания с понятной ценой и откликами рядом.</p>
-            </div>
-          ))}
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-6 rounded-[2rem] bg-slate-950 p-8 text-white lg:grid-cols-[1fr_0.8fr] lg:p-10">
+          <div>
+            <Badge tone="green">Доверие</Badge>
+            <h2 className="mt-5 text-3xl font-black tracking-tight">Выбирайте людей, а не случайные объявления</h2>
+            <p className="mt-4 max-w-2xl leading-8 text-slate-300">
+              У каждого пользователя есть профиль, отзывы, рейтинг и история взаимодействий. Это делает локальные задачи понятнее и безопаснее.
+            </p>
+          </div>
+
+          <div className="grid gap-3">
+            {["Проверенный профиль", "Отзывы после задания", "Чат с исполнителем"].map((item) => (
+              <div key={item} className="rounded-3xl bg-white/10 p-4 font-bold">
+                ✓ {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl rounded-[2rem] bg-indigo-50 p-8 text-center">
+          <h2 className="text-3xl font-black tracking-tight text-slate-950">Готовы попробовать?</h2>
+          <p className="mt-3 text-slate-600">Создайте первое задание за 1 минуту.</p>
+          <Button onClick={() => setScreen("create")} className="mt-6 h-14 px-8 text-base">
+            Создать задание
+          </Button>
         </div>
       </section>
     </main>
   );
 }
-
 function Auth({ onAuthReady, setScreen }) {
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({ email: "", password: "", fullName: "", phone: "", city: "Рига", role: "both" });
@@ -624,57 +770,173 @@ function TaskDetails({ task, session, setScreen, refreshApplications }) {
   );
 }
 
-function Chats({ session, messages, setMessages }) {
+function Chats({ session, messages, setMessages, selectedChatTask, profiles, tasks, setScreen, setSelectedChatTask }) {
   const [draft, setDraft] = useState("");
+  const activeTask = selectedChatTask || null;
+
+  const chatMessages = useMemo(() => {
+    if (!activeTask) return [];
+    return messages.filter((message) => message.task_id === activeTask.id);
+  }, [messages, activeTask]);
+
+  const otherUserId = useMemo(() => {
+    if (!session || !activeTask) return null;
+    if (activeTask.customer_id === session.user.id) return activeTask.selected_performer_id || null;
+    return activeTask.customer_id || null;
+  }, [session, activeTask]);
+
+  const otherUser = otherUserId ? profiles[otherUserId] : null;
 
   async function sendMessage() {
-    if (!session || !draft.trim()) return;
+    if (!session || !activeTask || !draft.trim()) return;
+
+    if (!otherUserId) return;
 
     const text = draft.trim();
     setDraft("");
 
-    const { error } = await supabase.from("messages").insert({
-      sender_id: session.user.id,
-      body: text,
-    });
+    const { data, error } = await supabase
+      .from("messages")
+      .insert({
+        task_id: activeTask.id,
+        sender_id: session.user.id,
+        recipient_id: otherUserId,
+        body: text,
+      })
+      .select()
+      .single();
 
-    if (!error) {
-      setMessages((current) => [...current, { id: Date.now(), body: text, sender_id: session.user.id, created_at: new Date().toISOString() }]);
+    if (!error && data) {
+      setMessages((current) => [...current, data]);
     }
+  }
+
+  if (!session) {
+    return (
+      <main className="min-h-screen bg-slate-50">
+        <div className="mx-auto max-w-3xl px-4 py-12">
+          <div className="rounded-[2rem] bg-white p-8 text-center shadow-sm">
+            <h1 className="text-3xl font-black">Чат доступен после входа</h1>
+            <Button onClick={() => setScreen("auth")} className="mt-6">
+              Войти
+            </Button>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (!activeTask) {
+    const acceptedCustomerTasks = tasks.filter((task) => task.customer_id === session.user.id && task.status === "assigned");
+    const acceptedPerformerTasks = tasks.filter((task) => task.selected_performer_id === session.user.id && task.status === "assigned");
+    const chatTasks = [...acceptedCustomerTasks, ...acceptedPerformerTasks];
+
+    return (
+      <main className="min-h-screen bg-slate-50">
+        <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+          <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+            <h1 className="text-3xl font-black">Чаты</h1>
+            <p className="mt-2 text-slate-600">
+              Чат появляется после того, как заказчик выбрал исполнителя.
+            </p>
+
+            <div className="mt-6 grid gap-3">
+              {chatTasks.length === 0 ? (
+                <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">
+                  Пока нет активных чатов. Выберите исполнителя в откликах или дождитесь выбора по вашему отклику.
+                </div>
+              ) : (
+                chatTasks.map((task) => {
+                  const customer = profiles[task.customer_id];
+                  const performer = profiles[task.selected_performer_id];
+
+                  return (
+                    <button
+                      key={task.id}
+                      onClick={() => {
+                        setSelectedChatTask(task);
+                        setScreen("chats");
+                      }}
+                      className="rounded-3xl border border-slate-100 bg-slate-50 p-5 text-left transition hover:bg-white hover:shadow-sm"
+                    >
+                      <div className="font-black">{task.title}</div>
+                      <div className="mt-2 text-sm text-slate-500">
+                        Заказчик: {customer?.full_name || "Пользователь"} · Исполнитель: {performer?.full_name || "Пользователь"}
+                      </div>
+                    </button>
+                  );
+                })
+              )}
+            </div>
+          </section>
+        </div>
+      </main>
+    );
   }
 
   return (
     <main className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[320px_1fr] lg:px-8">
+        <aside className="rounded-[2rem] bg-white p-5 shadow-sm">
+          <h1 className="text-2xl font-black">Чаты</h1>
+          <p className="mt-1 text-sm text-slate-500">Диалог по выбранному заданию.</p>
+
+          <div className="mt-5 rounded-3xl bg-indigo-50 p-4">
+            <div className="font-black text-indigo-950">{activeTask.title}</div>
+            <div className="mt-1 text-sm text-indigo-700">
+              Собеседник: {otherUser?.full_name || "Пользователь"}
+            </div>
+          </div>
+
+          <Button onClick={() => setScreen("profile")} variant="outline" className="mt-4 w-full">
+            Назад в профиль
+          </Button>
+        </aside>
+
         <section className="flex min-h-[620px] flex-col rounded-[2rem] bg-white shadow-sm">
           <div className="border-b border-slate-100 p-5">
-            <div className="font-black">Демо-чат</div>
-            <div className="mt-1 text-sm text-slate-500">Сообщения сохраняются в Supabase messages.</div>
+            <div className="font-black">{activeTask.title}</div>
+            <div className="mt-1 text-sm text-slate-500">
+              Задание · {activeTask.city} · €{activeTask.price}
+            </div>
           </div>
 
           <div className="flex-1 space-y-3 overflow-y-auto p-5">
-            {messages.map((m) => (
-              <div key={m.id} className={`flex ${m.sender_id === session?.user?.id ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[80%] rounded-3xl p-4 ${m.sender_id === session?.user?.id ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-900"}`}>
-                  <div className="leading-6">{m.body}</div>
-                </div>
+            {chatMessages.length === 0 ? (
+              <div className="rounded-3xl bg-slate-50 p-5 text-center text-slate-500">
+                Пока нет сообщений. Напишите первым.
               </div>
-            ))}
+            ) : (
+              chatMessages.map((m) => {
+                const mine = m.sender_id === session.user.id;
+                const sender = profiles[m.sender_id];
+
+                return (
+                  <div key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[80%] rounded-3xl p-4 ${mine ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-900"}`}>
+                      <div className="text-xs font-black opacity-70">
+                        {mine ? "Вы" : sender?.full_name || "Пользователь"}
+                      </div>
+                      <div className="mt-2 leading-6">{m.body}</div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
 
           <div className="border-t border-slate-100 p-4">
             <div className="flex gap-2 rounded-3xl bg-slate-50 p-2">
               <input
-                disabled={!session}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") sendMessage();
                 }}
-                className="flex-1 bg-transparent px-3 outline-none disabled:opacity-50"
-                placeholder={session ? "Написать сообщение..." : "Войдите, чтобы писать"}
+                className="flex-1 bg-transparent px-3 outline-none"
+                placeholder="Написать сообщение..."
               />
-              <Button onClick={sendMessage} disabled={!session}>
+              <Button onClick={sendMessage} disabled={!draft.trim()}>
                 {icons.send}
               </Button>
             </div>
@@ -685,7 +947,7 @@ function Chats({ session, messages, setMessages }) {
   );
 }
 
-function Profile({ session, profile, setProfile, reviews, setScreen, tasks, applications, profiles, refreshApplications }) {
+function Profile({ session, profile, setProfile, reviews, setScreen, tasks, applications, profiles, refreshApplications, refreshTasks, setSelectedChatTask }) {
   const [draft, setDraft] = useState(profile || {});
   const [status, setStatus] = useState("");
 
@@ -799,8 +1061,18 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
       return;
     }
 
-    setStatus("Исполнитель выбран.");
+    const relatedTask = tasks.find((task) => task.id === application.task_id);
+    if (relatedTask) {
+      setSelectedChatTask({
+        ...relatedTask,
+        status: "assigned",
+        selected_performer_id: application.performer_id,
+      });
+    }
+
+    setStatus("Исполнитель выбран. Теперь можно открыть чат.");
     await refreshApplications();
+    await refreshTasks();
   }
 
   return (
@@ -954,11 +1226,77 @@ function Profile({ session, profile, setProfile, reviews, setScreen, tasks, appl
                             Выбрать исполнителя
                           </Button>
                         )}
+
+                        {application.status === "accepted" && relatedTask && (
+                          <Button
+                            onClick={() => {
+                              setSelectedChatTask({
+                                ...relatedTask,
+                                selected_performer_id: application.performer_id,
+                                status: "assigned",
+                              });
+                              setScreen("chats");
+                            }}
+                            className="mt-2"
+                          >
+                            Открыть чат
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
                 );
               })
+            )}
+          </div>
+        </section>
+
+        <section className="mt-6 rounded-[2rem] bg-white p-6 shadow-sm">
+          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="text-2xl font-black">Мои принятые задания</h2>
+              <p className="mt-2 text-sm text-slate-500">
+                Здесь исполнитель видит задания, где его выбрал заказчик.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-4">
+            {applications.filter((application) => application.performer_id === session.user.id && application.status === "accepted").length === 0 ? (
+              <div className="rounded-3xl bg-slate-50 p-5 text-slate-500">
+                Пока вас не выбрали исполнителем.
+              </div>
+            ) : (
+              applications
+                .filter((application) => application.performer_id === session.user.id && application.status === "accepted")
+                .map((application) => {
+                  const relatedTask = tasks.find((task) => task.id === application.task_id);
+                  const customer = relatedTask ? profiles[relatedTask.customer_id] : null;
+
+                  return (
+                    <div key={application.id} className="rounded-3xl border border-slate-100 bg-slate-50 p-5">
+                      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                        <div>
+                          <div className="text-lg font-black">{relatedTask?.title || "Задание"}</div>
+                          <div className="mt-2 text-sm text-slate-500">
+                            Заказчик: {customer?.full_name || "Пользователь"} · {relatedTask?.city || "Город не указан"}
+                          </div>
+                        </div>
+
+                        {relatedTask && (
+                          <Button
+                            onClick={() => {
+                              setSelectedChatTask(relatedTask);
+                              setScreen("chats");
+                            }}
+                          >
+                            Открыть чат
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
             )}
           </div>
         </section>
@@ -1021,6 +1359,7 @@ export default function ParttimeApp() {
   const [messages, setMessages] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedChatTask, setSelectedChatTask] = useState(null);
 
   useEffect(() => {
     if (!isSupabaseConfigured) return;
@@ -1044,45 +1383,33 @@ export default function ParttimeApp() {
 
     return () => authListener.subscription.unsubscribe();
   }, []);
-async function loadEverything(activeSession = session) {
-  if (!isSupabaseConfigured) return;
 
-  const [
-    { data: taskRows },
-    { data: profileRows },
-    { data: messageRows },
-    { data: reviewRows },
-    { data: applicationRows }
-  ] = await Promise.all([
-    supabase.from("tasks").select("*").order("created_at", { ascending: false }),
-    supabase.from("profiles").select("*"),
-    supabase.from("messages").select("*").order("created_at", { ascending: true }).limit(50),
-    supabase.from("reviews").select("*").order("created_at", { ascending: false }),
-    supabase.from("applications").select("*").order("created_at", { ascending: false }),
-  ]);
+  async function loadEverything(activeSession = session) {
+    if (!isSupabaseConfigured) return;
 
-  setTasks(taskRows || []);
-  setMessages(messageRows || []);
-  setReviews(reviewRows || []);
-  setApplications(applicationRows || []);
+    const [{ data: taskRows }, { data: profileRows }, { data: applicationRows }, { data: messageRows }, { data: reviewRows }] =
+      await Promise.all([
+        supabase.from("tasks").select("*").order("created_at", { ascending: false }),
+        supabase.from("profiles").select("*"),
+        supabase.from("applications").select("*").order("created_at", { ascending: false }),
+        supabase.from("messages").select("*").order("created_at", { ascending: true }).limit(50),
+        supabase.from("reviews").select("*").order("created_at", { ascending: false }),
+      ]);
 
-  const byId = {};
-  (profileRows || []).forEach((p) => {
-    byId[p.id] = p;
-  });
-  setProfiles(byId);
+    setTasks(taskRows || []);
+    setApplications(applicationRows || []);
+    setMessages(messageRows || []);
+    setReviews(reviewRows || []);
 
-  if (activeSession?.user?.id) {
-    setProfile(
-      byId[activeSession.user.id] || {
-        id: activeSession.user.id,
-        full_name: activeSession.user.email,
-        role: "both",
-        city: "Рига",
-      }
-    );
-  }
-}
+    const byId = {};
+    (profileRows || []).forEach((p) => {
+      byId[p.id] = p;
+    });
+    setProfiles(byId);
+
+    if (activeSession?.user?.id) {
+      setProfile(byId[activeSession.user.id] || { id: activeSession.user.id, full_name: activeSession.user.email, role: "both", city: "Рига" });
+    }
   }
 
   async function refreshTasks() {
@@ -1117,7 +1444,7 @@ async function loadEverything(activeSession = session) {
       {screen === "feed" && <Feed tasks={tasks} profiles={profiles} setSelectedTask={setSelectedTask} setScreen={setScreen} />}
       {screen === "create" && <CreateTask session={session} setScreen={setScreen} refreshTasks={refreshTasks} />}
       {screen === "task" && <TaskDetails task={selectedTask} session={session} setScreen={setScreen} refreshApplications={refreshApplications} />}
-      {screen === "chats" && <Chats session={session} messages={messages} setMessages={setMessages} />}
+      {screen === "chats" && <Chats session={session} messages={messages} setMessages={setMessages} selectedChatTask={selectedChatTask} profiles={profiles} tasks={tasks} setScreen={setScreen} setSelectedChatTask={setSelectedChatTask} />}
       {screen === "profile" && (
         <Profile
           session={session}
@@ -1129,6 +1456,8 @@ async function loadEverything(activeSession = session) {
           applications={applications}
           profiles={profiles}
           refreshApplications={refreshApplications}
+          refreshTasks={refreshTasks}
+          setSelectedChatTask={setSelectedChatTask}
         />
       )}
 
